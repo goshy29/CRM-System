@@ -74,7 +74,7 @@ public class Manager {
                 menuIndex = backMenu();
                 break;
             case 5:
-                String name = ValidString.validateStringInput("Enter full name: ");
+                String name = ValidString.validateStringInput("Enter name: ");
                 service.getClientByName(name);
                 menuIndex = backMenu();
                 break;
@@ -112,7 +112,7 @@ public class Manager {
         System.out.println("8. Back");
         System.out.println("9. Exit");
         Scanner sc = new Scanner(System.in);
-        int menuIndex = Integer.parseInt(sc.nextLine());
+        int menuIndex = ValidInt.validateIntegerInput("Enter action: ");
         return menuIndex;
     }
 }
