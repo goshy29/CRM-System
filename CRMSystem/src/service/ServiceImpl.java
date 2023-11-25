@@ -6,6 +6,8 @@ import file.CSVWriter;
 import model.Client;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ServiceImpl extends ClientService {
     private String file;
@@ -53,8 +55,10 @@ public class ServiceImpl extends ClientService {
     public void getClientByName(String name) {
         HashMap<Integer, Client> map = getAllClients();
         boolean isEmptyByName = true;
+        Pattern pattern = Pattern.compile(Pattern.quote(name), Pattern.CASE_INSENSITIVE);
         for (HashMap.Entry<Integer, Client> entry : map.entrySet()) {
-            if (entry.getValue().getName().equals(name)) {
+            Matcher matcher = pattern.matcher(entry.getValue().getName());
+            if (matcher.find()) {
                 isEmptyByName = false;
                 System.out.printf("%d. Name: %s, Industry: %s, Contact Person: %s, Revenue: %.2f%n",
                         entry.getValue().getId(), entry.getValue().getName(), entry.getValue().getIndustry(),
@@ -67,9 +71,11 @@ public class ServiceImpl extends ClientService {
     @Override
     public void getClientByIndustry(String industry) {
         HashMap<Integer, Client> map = getAllClients();
+        Pattern pattern = Pattern.compile(Pattern.quote(industry), Pattern.CASE_INSENSITIVE);
         boolean isEmptyIndustry = true;
         for (HashMap.Entry<Integer, Client> entry : map.entrySet()) {
-            if (entry.getValue().getIndustry().equals(industry)) {
+            Matcher matcher = pattern.matcher(entry.getValue().getIndustry());
+            if (matcher.find()) {
                 isEmptyIndustry = false;
                 System.out.printf("%d. Name: %s, Industry: %s, Contact Person: %s, Revenue: %.2f%n",
                         entry.getValue().getId(), entry.getValue().getName(), entry.getValue().getIndustry(),
@@ -82,9 +88,11 @@ public class ServiceImpl extends ClientService {
     @Override
     public void getClientByContactPerson(String contactPerson) {
         HashMap<Integer, Client> map = getAllClients();
+        Pattern pattern = Pattern.compile(Pattern.quote(contactPerson), Pattern.CASE_INSENSITIVE);
         boolean isEmptyContactPerson = true;
         for (HashMap.Entry<Integer, Client> entry : map.entrySet()) {
-            if (entry.getValue().getContactPerson().equals(contactPerson)) {
+            Matcher matcher = pattern.matcher(entry.getValue().getContactPerson());
+            if (matcher.find()) {
                 isEmptyContactPerson = false;
                 System.out.printf("%d. Name: %s, Industry: %s, Contact Person: %s, Revenue: %.2f%n",
                         entry.getValue().getId(), entry.getValue().getName(), entry.getValue().getIndustry(),
